@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Facts Time</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png');
+      background-color: #e0e0e0;
+      font-family: Georgia, serif;
+      color: #000;
+    }
+
+    header {
+      background: transparent;
+      color: #000;
+      text-align: center;
+      padding: 20px;
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .auth-btn {
+      padding: 6px 16px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border: none;
+      cursor: pointer;
+    }
+
+    .auth-btn:hover {
+      background: #1e7b78f3;
+      color: #fff;
+    }
+
+    .menu {
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .menu button {
+      margin: 5px 10px;
+      padding: 10px 24px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      background: #fff;
+      color: #000;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu button:hover,
+    .menu button.active {
+      background: #1e7b78f3;
+      color: #fff;
+      box-shadow: 0 0 12px #1e7b78f3;
+      backdrop-filter: blur(4px);
+    }
+
+    .page {
+      display: none;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .section {
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .headline {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .image {
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+
+    .content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .nav-buttons {
+      text-align: center;
+      margin: 20px auto 40px;
+    }
+
+    .nav-buttons button {
+      padding: 10px 24px;
+      margin: 0 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-buttons button:hover {
+      background: #1e7b78f3;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      background: #000;
+      color: white;
+      padding: 15px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content h2 {
+      text-align: center;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+      background: #1e7b78f3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>The Facts Time</header>
+
+<div class="top-bar">
+  <div id="date">Loading date...</div>
+  <div class="auth-buttons">
+    <button class="auth-btn" onclick="openModal('loginModal')">Login</button>
+    <button class="auth-btn" onclick="openModal('signupModal')">Sign Up</button>
+  </div>
+</div>
+
+<div class="menu">
+  <button onclick="showCategory(0)" class="active">Business</button>
+  <button onclick="showCategory(1)">Climate</button>
+  <button onclick="showCategory(2)">Crime</button>
+  <button onclick="showCategory(3)">Movies</button>
+  <button onclick="showCategory(4)">Sports</button>
+</div>
+
+<div class="page category-business active">
+  <div class="section">Business</div>
+  <div class="headline">Tesla Launches Model Y in India</div>
+  <img src="C:\Users\admin\Downloads\tesla.webp" class="image" alt="Tesla" width="600" height="350">
+  <div class="content">
+    <p>Showcased at its new showroom in Mumbai, India’s financial capital, on Tuesday, Tesla’s Model Y is now on sale for about $70,000, a price comparatively higher than in any other major market.</p>
+
+  <h4>Recommended Stories</h4>
+  <ul>
+    <li>Tesla launches Model Y in India with elevated price tag amid high tariffs</li>
+    <li>Who are the MAGA influencers calling for Pam Bondi’s head over Epstein?</li>
+    <li>Why is Mexico threatening to sue Elon Musk over SpaceX debris?</li>
+    <li>Musk says 50-50 chance of uncrewed Starship to Mars by late 2026</li>
+  </ul>
+
+  <p>Elon Musk’s electric vehicle (EV) company is braving high tariffs and stiff competition in India’s nascent but rapidly expanding EV market.</p>
+
+  <p>As New Delhi negotiates a trade deal with the United States, India’s car sector tariffs, arguably among the highest in the world, are a central topic.</p>
+
+  <p>“Tesla’s entry into India marks a significant expansion of the company’s global footprint,” said Kwan Wongwetsawat, a senior auto analyst at the research firm GlobalData. “Before this decision, Tesla faced several market challenges,” he said, ranging from geopolitical concerns, a decline in global sales, and an uncertain launch schedule for a new compact model.</p>
+
+  <p>So, what’s the buzz about Tesla coming to India? Can it leverage the developing Indian market? And can India give a shoulder to Musk’s EV giant as its global sales plummet?</p>
+  </div>
+</div>
+
+<div class="page category-climate">
+  <div class="section">Climate</div>
+  <div class="headline">sudden climate changes</div>
+  <img src="C:\Users\admin\Downloads\weather.png" class="image" alt="Global Warming" width="600" height="350">
+  <div class="content">
+     At 10:02 AM, the weather is cloudy with a temperature of 28°C, but it feels slightly warmer at 30°C due to high humidity. The humidity level is 75%, making it feel extremely humid indoors as well. Winds are blowing from the west-southwest at 16 km/h, with gusts reaching 20 km/h, creating a gentle breeze.
+
+The atmospheric pressure is 1001 mb and falling, which may indicate a chance of rain or unstable weather. Cloud cover is complete (100%), with a low cloud ceiling of 1000 meters, contributing to the overcast skies. Visibility remains moderate at 8 km, and the UV index is low (2), suggesting minimal sun exposure risk.
+  </div>
+</div>
+
+<div class="page category-crime">
+  <div class="section">Crime</div>
+  <div class="headline">Global Cyber Attack Uncovered</div>
+  <img src="C:\Users\admin\Downloads\crime.webp" class="image" alt="Cyber Attack" width="600" height="350">
+  <div class="content">
+ Last week's deadly militant attack in Pahalgam in Indian-administered Kashmir, which claimed 26 civilian lives, has reignited a grim sense of déjà vu for India's security forces and diplomats.
+
+This is familiar ground. In 2016, after 19 Indian soldiers were killed in Uri, India launched "surgical strikes" across the Line of Control – the de facto border between India and Pakistan - targeting militant bases.
+
+In 2019, the Pulwama bombing, which left 40 Indian paramilitary personnel dead, prompted airstrikes deep into Balakot - the first such action inside Pakistan since 1971 - sparking retaliatory raids and an aerial dogfight.
+
+And before that, the horrific 2008 Mumbai attacks - a 60-hour siege on hotels, a railway station, and a Jewish centre - claimed 166 lives.
+
+Each time, India has held Pakistan-based militant groups responsible for the attacks, accusing Islamabad of tacitly supporting them - a charge Pakistan has consistently denied.
+
+Since 2016, and especially after the 2019 airstrikes, the threshold for escalation has shifted dramatically. Cross-border and aerial strikes by India have become the new norm, provoking retaliation from Pakistan. This has further intensified an already volatile situation.
+
+Once again, experts say, India finds itself walking the tightrope between escalation and restraint - a fragile balance of response and deterrence. One person who understands this recurring cycle is Ajay Bisaria, India's former high commissioner to Pakistan during the Pulwama attack, who captured its aftermath in his memoir, Anger Management: The Troubled Diplomatic Relationship between India and Pakistan.
+  </div>
+</div>
+
+<div class="page category-movies">
+  <div class="section">Movies</div>
+  <div class="headline">Sci-Fi Film Breaks Records</div>
+  <img src="C:\Users\admin\Downloads\movie.jpg"class="image" alt="Movie" width="600" height="350">
+  <div class="content">
+ War 2 Trailer First Review: Amidst the ongoing Saiyaara fever all across the country, Yash Raj Films is coming up with yet another buzz-worthy film of the year, 'War 2'. After creating a storm with the stylish and high-octane teaser of War 2, it's time for the full-fledged trailer! While the first part was helmed by Siddharth Anand, this time, the makers brought Ayan Mukerji on board in the director's chair. Fans can't wait to see Hrithik Roshan, who will reprise his role 'Kabir' from War, locking horns with Jr NTR on big screens.
+  </div>
+</div>
+
+<div class="page category-sports">
+  <div class="section">Sports</div>
+  <div class="headline">Cricket Final Ends in Drama</div>
+  <img src="C:\Users\admin\Downloads\sports.webp"  class="image" alt="Cricket" width="600" height="350">
+  <div class="content">
+   Indian Premier League’s enterprise valuation rose by 12.9 per cent to $18.5 billion, while the stand-alone brand value of the IPL has increased by 13.8 per cent to $3.9 billion, according to the latest study released by Houlihan Lokey, Inc., the global investment bank. Royal Challengers Bengaluru surpassed Chennai Super Kings to emerge as the most valued IPL franchise at $269 million (up from $227 million), as it clinched its maiden IPL in 2025, ending a 17-year wait.
+
+Reflecting IPL’s growing appeal, the report noted that the Board of Control for Cricket in India’s sale of four associate-sponsor slots — My11Circle, Angel One, RuPay, and CEAT — generated ₹1,485 crores, a 25 per cent increase over the previous cycle. Meanwhile, the Tata Group extended its title-sponsorship commitment through 2028 in a lucrative five-year deal worth $300 million (₹2,500 crore).
+  </div>
+</div>
+
+<div class="nav-buttons">
+  <button id="prevBtn" onclick="prevTab()">Previous</button>
+  <button id="nextBtn" onclick="nextTab()">Next</button>
+</div>
+
+<footer>
+  &copy; 2025 The Facts Time | All Rights Reserved
+</footer>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Login</h2>
+    <form>
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+    <h2>Sign Up</h2>
+    <form>
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <select required>
+        <option value="">Choose Subscription</option>
+        <option value="free">Free</option>
+        <option value="monthly">Monthly - ₹199</option>
+        <option value="yearly">Yearly - ₹999</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const categories = ["business", "climate", "crime", "movies", "sports"];
+  let currentTab = 0;
+
+  function showCategory(index) {
+    currentTab = index;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.menu button').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.category-${categories[index]}`).classList.add('active');
+    document.querySelectorAll('.menu button')[index].classList.add('active');
+    document.getElementById('prevBtn').disabled = index === 0;
+    document.getElementById('nextBtn').disabled = index === categories.length - 1;
+  }
+
+  function nextTab() {
+    if (currentTab < categories.length - 1) showCategory(currentTab + 1);
+  }
+
+  function prevTab() {
+    if (currentTab > 0) showCategory(currentTab - 1);
+  }
+
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      event.target.style.display = "none";
+    }
+  }
+
+  document.getElementById('date').textContent = new Date().toLocaleDateString(undefined, {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  showCategory(0);
+</script>
+
+</body>
+</html>
